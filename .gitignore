@@ -1,8 +1,9 @@
 libpipex.a
-obj/*
+obj/
 text.txt
 text2.txt
-tester/*
+tester/
+2tester/
 a.out
 tester
-
+pipex
