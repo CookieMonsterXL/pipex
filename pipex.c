@@ -6,7 +6,7 @@
 /*   By: tbouma <tbouma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 18:06:42 by tbouma            #+#    #+#             */
-/*   Updated: 2022/03/24 09:23:42 by tbouma           ###   ########.fr       */
+/*   Updated: 2022/03/24 11:08:22 by tbouma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <fcntl.h>
 #include "pipex.h"
 #include "libft/libft.h"
+#include <stdio.h>
 
 char	*find_command(char **dubbleptr, char *command)
 {
@@ -62,10 +63,11 @@ void	child_two(t_pipex pipex, char **argv_exe, char **envp)
 	//char	**argv_exe;
 
 	//argv_exe = ft_split(argv[2], ' ');
+	close(pipex.tube[1]);
 	dup2(pipex.tube[0], STDIN_FILENO);
+	dup2(pipex.outfile, 1);
 	root_paths = find_path(envp);
 	pipex.command_path = find_command(root_paths, argv_exe[0]);
-	dup2(pipex.outfile, 1);
 	execve(pipex.command_path, argv_exe, envp);
 }
 
@@ -76,10 +78,11 @@ void	child_one(t_pipex pipex, char **argv_exe, char **envp)
 	//char	**argv_exe;
 
 	//argv_exe = ft_split(argv[2], ' ');
+	close(pipex.tube[0]);
 	dup2(pipex.tube[1], STDOUT_FILENO);
+	dup2(pipex.infile, 0);
 	root_paths = find_path(envp);
 	pipex.command_path = find_command(root_paths, argv_exe[0]);
-	dup2(pipex.infile, 0);
 	execve(pipex.command_path, argv_exe, envp);
 }
 

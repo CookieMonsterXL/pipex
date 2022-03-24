@@ -2,4 +2,5 @@ libpipex.a
 obj/*
 text.txt
 text2.txt
-
+tester/*
+a.out
