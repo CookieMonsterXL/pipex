@@ -1,7 +1,7 @@
 NAME := pipex
 SRCFILES := pipex.c utils.c childs.c
 LIBFT := ./libft/libft.a
-CFLAG := -Wall -Wextra -Werror #-fsanitize=address -g
+CFLAG := -Wall -Wextra -Werror
 
 all: libft $(NAME)
 
