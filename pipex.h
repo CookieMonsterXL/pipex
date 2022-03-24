@@ -6,7 +6,7 @@
 /*   By: tbouma <tbouma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/05 10:38:28 by tbouma            #+#    #+#             */
-/*   Updated: 2022/03/24 13:03:33 by tbouma           ###   ########.fr       */
+/*   Updated: 2022/03/24 16:12:13 by tbouma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,14 +54,16 @@ typedef struct s_pipex
 	char	*command_path;
 	char	**cmd_args;
 	char	*cmd;
-	char	**argv_exe[2];
+	char	**command[2];
 }t_pipex;
+
+void	parent_procces(t_pipex pipex, char **envp);
 
 /* childs.c */
 void	child_one(t_pipex pipex, char *envp[]);
 void	child_two(t_pipex pipex, char *envp[]);
 
-/* free.c */
+/* utils.c */
 void	parent_free(t_pipex *pipex);
 void	child_free(t_pipex *pipex);
 
@@ -70,7 +72,7 @@ void	msg_error(char *err);
 int		msg(char *err);
 
 /* funcions */
-char	*find_command(char **dubbleptr, char *command);
+char	*find_command_path(char **dubbleptr, char *command);
 char	**find_path(char **envp);
 // char	*ft_strjoin(char const *s1, char const *s2);
 // char	*ft_strdup(const char *src);

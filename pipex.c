@@ -6,13 +6,13 @@
 /*   By: tbouma <tbouma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 18:06:42 by tbouma            #+#    #+#             */
-/*   Updated: 2022/03/24 13:02:42 by tbouma           ###   ########.fr       */
+/*   Updated: 2022/03/24 16:07:57 by tbouma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	pipex_func(t_pipex pipex, char **envp)
+void	parent_procces(t_pipex pipex, char **envp)
 {
 	int		status;
 
@@ -36,18 +36,22 @@ void	pipex_func(t_pipex pipex, char **envp)
 int	main(int argc, char **argv, char **envp)
 {
 	t_pipex	pipex;
-	char	**argv_exe[2];
+	//char arr[10];
 
+	argc = 0;
 	pipex.infile = open(argv[1], O_RDONLY);
 	pipex.outfile = open(argv[4], O_CREAT | O_RDWR | O_TRUNC, 0644);
 	if (pipex.infile < 0 || pipex.outfile < 0)
 		return (-1);
-	pipex.argv_exe[0] = ft_split(argv[2], ' ');
-	pipex.argv_exe[1] = ft_split(argv[3], ' ');
-	pipex_func(pipex, envp);
-	free(argv_exe[0]);
+	pipex.command[0] = ft_split(argv[2], ' ');
+	pipex.command[1] = ft_split(argv[3], ' ');
+	parent_procces(pipex, envp);
+	parent_free(&pipex);
 	//free(pipex.cmd);
+	system("leaks pipex");
 	return (0);
+	
 }
+
 
 // gcc pipex.c libpipex.a && ./a.out text.txt "wc -l" "cat" text2.txt

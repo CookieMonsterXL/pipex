@@ -1,7 +1,7 @@
 NAME := pipex
 SRCFILES := pipex.c utils.c childs.c
 LIBFT := ./libft/libft.a
-CFLAG := -Wall -Wextra -Werror
+CFLAG := -Wall -Wextra -Werror #-fsanitize=address -g
 
 all: libft $(NAME)
 
@@ -13,11 +13,7 @@ relibft:
 
 $(NAME): $(SRCFILES)
 	cp $(LIBFT) $(NAME)
-	gcc  $(SRCFILES) $(LIBFT) -o $(NAME) 
-
-# obj/%.o: %.c
-# 	@mkdir -p $(dir $@)
-# 	$(CC) -c $(CFLAGS) -o $@ $<
+	gcc  $(SRCFILES) $(CFLAG) $(LIBFT) -o $(NAME) 
 
 clean:
 	rm -f $(NAME)

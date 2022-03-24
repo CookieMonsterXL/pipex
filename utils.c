@@ -6,23 +6,34 @@
 /*   By: tbouma <tbouma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 11:27:39 by tbouma            #+#    #+#             */
-/*   Updated: 2022/03/24 13:02:02 by tbouma           ###   ########.fr       */
+/*   Updated: 2022/03/24 16:04:50 by tbouma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-// void	parent_free(t_pipex *pipex)
-// {
-// 	while (i >= 0)
-// 	{
-// 		free(str_arr[i]);
-// 		i--;
-// 	}
-// 	free(str_arr);
-// }
+void	parent_free(t_pipex *pipex)
+{
+	int	i;
+	int	k;
 
-char	*find_command(char **dubbleptr, char *command)
+	i = 0;
+	k = 0;
+	while (i < 2)
+	{
+		while (pipex->command[i][k])
+		{
+			free(pipex->command[i][k]);
+			k++;
+		}
+		free(pipex->command[i]);
+		i++;
+		k = 0;
+	}
+	//free(str_arr);
+}
+
+char	*find_command_path(char **dubbleptr, char *command)
 {
 	char	*temp;
 	int		i;
