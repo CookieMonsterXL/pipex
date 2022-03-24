@@ -6,7 +6,7 @@
 /*   By: tbouma <tbouma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 18:06:42 by tbouma            #+#    #+#             */
-/*   Updated: 2022/03/24 17:56:54 by tbouma           ###   ########.fr       */
+/*   Updated: 2022/03/24 18:22:36 by tbouma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,11 @@ void	parent_procces(t_pipex pipex, char **envp)
 		return (perror(ERR_PIPE));
 	if (pipex.pid1 == 0)
 		child_one(pipex, envp);
-	//pipex.pid2 = fork();
 	else
 		child_two(pipex, envp);
 	close(pipex.tube[0]);
 	close(pipex.tube[1]);
 	waitpid(pipex.pid1, &status, 0);
-	//waitpid(pipex.pid2, &status, 0);
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -49,7 +47,6 @@ int	main(int argc, char **argv, char **envp)
 	parent_free(&pipex);
 	return (0);
 }
-
 
 	// system("leaks pipex");
 // gcc pipex.c libpipex.a && ./a.out text.txt "wc -l" "cat" text2.txt
