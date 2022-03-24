@@ -6,15 +6,20 @@
 /*   By: tbouma <tbouma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/05 10:38:28 by tbouma            #+#    #+#             */
-/*   Updated: 2022/03/05 11:48:35 by tbouma           ###   ########.fr       */
+/*   Updated: 2022/03/24 13:03:33 by tbouma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PIPEX_H
 # define PIPEX_H
 
-/* to write, read, close, access, pipe, dup, dup2, execve, fork */
+# include "libft/libft.h"
 # include <unistd.h>
+# include <fcntl.h>
+# include "libft/libft.h"
+# include <stdio.h>
+
+/* to write, read, close, access, pipe, dup, dup2, execve, fork */
 # include <sys/types.h>
 # include <sys/uio.h>
 
@@ -49,11 +54,12 @@ typedef struct s_pipex
 	char	*command_path;
 	char	**cmd_args;
 	char	*cmd;
+	char	**argv_exe[2];
 }t_pipex;
 
 /* childs.c */
-void	child_one(t_pipex pipex, char *argv[], char *envp[]);
-void	child_two(t_pipex pipex, char *argv[], char *envp[]);
+void	child_one(t_pipex pipex, char *envp[]);
+void	child_two(t_pipex pipex, char *envp[]);
 
 /* free.c */
 void	parent_free(t_pipex *pipex);
@@ -64,9 +70,11 @@ void	msg_error(char *err);
 int		msg(char *err);
 
 /* funcions */
-char	*ft_strjoin(char const *s1, char const *s2);
-char	*ft_strdup(const char *src);
-char	**ft_split(char const *s, char c);
-int		ft_strncmp(const char *s1, const char *s2, size_t n);
+char	*find_command(char **dubbleptr, char *command);
+char	**find_path(char **envp);
+// char	*ft_strjoin(char const *s1, char const *s2);
+// char	*ft_strdup(const char *src);
+// char	**ft_split(char const *s, char c);
+// int		ft_strncmp(const char *s1, const char *s2, size_t n);
 
 #endif

@@ -1,5 +1,5 @@
-NAME := libpipex.a
-OBJFILES := obj/pipex.o
+NAME := pipex
+SRCFILES := pipex.c utils.c childs.c
 LIBFT := ./libft/libft.a
 CFLAG := -Wall -Wextra -Werror
 
@@ -11,20 +11,19 @@ libft:
 relibft:
 	make re -C ./libft
 
-$(NAME): $(OBJFILES)
+$(NAME): $(SRCFILES)
 	cp $(LIBFT) $(NAME)
-	ar -rsc  $(NAME) $(OBJFILES)
+	gcc  $(SRCFILES) $(LIBFT) -o $(NAME) 
 
-obj/%.o: %.c
-	@mkdir -p $(dir $@)
-	$(CC) -c $(CFLAGS) -o $@ $<
+# obj/%.o: %.c
+# 	@mkdir -p $(dir $@)
+# 	$(CC) -c $(CFLAGS) -o $@ $<
 
 clean:
-	rm -f $(OBJFILES)
+	rm -f $(NAME)
 
 fclean:	clean
 	rm -f $(NAME)
-	make fclean -C ./libft
 
 re: fclean all
 
