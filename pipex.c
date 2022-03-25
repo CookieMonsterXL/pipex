@@ -6,7 +6,7 @@
 /*   By: tbouma <tbouma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 18:06:42 by tbouma            #+#    #+#             */
-/*   Updated: 2022/03/25 13:02:29 by tbouma           ###   ########.fr       */
+/*   Updated: 2022/03/25 14:35:36 by tbouma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,4 @@ int	main(int argc, char **argv, char **envp)
 }
 
 	// system("leaks pipex");
-// gcc pipex.c childs.c utils.c libpipex.a -o pipex && ./pipex text.txt "grep k" "cat" text2.txt
+// gcc pipex.c childs.c utils.c libft/libft.a -o pipex && ./pipex text.txt "grep k" "cat" text2.txt
