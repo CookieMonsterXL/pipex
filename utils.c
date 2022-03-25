@@ -6,11 +6,17 @@
 /*   By: tbouma <tbouma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 11:27:39 by tbouma            #+#    #+#             */
-/*   Updated: 2022/03/24 17:59:21 by tbouma           ###   ########.fr       */
+/*   Updated: 2022/03/25 16:30:01 by tbouma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+
+void	error_msg(char *msg)
+{
+	perror(msg);
+	exit(1);
+}
 
 void	parent_free(t_pipex *pipex)
 {
@@ -41,9 +47,13 @@ char	*find_command_path(char **dubbleptr, char *command)
 	while (dubbleptr[i])
 	{
 		temp = ft_strjoin(dubbleptr[i], "/");
+		if (temp == NULL)
+			error_msg(ERR_MALLOC);
 		free(dubbleptr[i]);
 		dubbleptr[i] = temp;
 		temp = ft_strjoin(dubbleptr[i], command);
+		if (temp == NULL)
+			error_msg(ERR_MALLOC);
 		free(dubbleptr[i]);
 		dubbleptr[i] = temp;
 		if (access(dubbleptr[i], F_OK) == 0)
@@ -52,8 +62,8 @@ char	*find_command_path(char **dubbleptr, char *command)
 		}
 		i++;
 	}
+	perror(ERR_CMD);
 	exit(127);
-	return (NULL);
 }
 
 char	**find_path(char **envp)
@@ -63,10 +73,16 @@ char	**find_path(char **envp)
 	int		i;
 
 	i = 0;
-	while (!strstr(envp[i], "PATH="))
+	while (envp[i])
+	{
+		ptr = ft_strnstr(envp[i], "PATH=", strlen(envp[i]));
+		if (ptr != NULL)
+			break ;
 		i++;
-	ptr = strstr(envp[i], "PATH=");
+	}
 	ptr += 5;
 	dubbleptr = ft_split(ptr, ':');
+	if (dubbleptr == NULL)
+		error_msg(ERR_MALLOC);
 	return (dubbleptr);
 }

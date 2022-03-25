@@ -6,7 +6,7 @@
 /*   By: tbouma <tbouma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 11:25:27 by tbouma            #+#    #+#             */
-/*   Updated: 2022/03/24 18:18:08 by tbouma           ###   ########.fr       */
+/*   Updated: 2022/03/25 16:31:48 by tbouma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,6 @@ void	child_one(t_pipex pipex, char **envp)
 	dup2(pipex.infile, STDIN_FILENO);
 	root_paths = find_path(envp);
 	pipex.command_path = find_command_path(root_paths, pipex.command[0][0]);
-	if (pipex.command_path == NULL)
-	{
-		perror(ERR_CMD);
-		exit(127);
-	}
 	execve(pipex.command_path, pipex.command[0], envp);
 }
 
@@ -38,10 +33,5 @@ void	child_two(t_pipex pipex, char **envp)
 	dup2(pipex.outfile, STDOUT_FILENO);
 	root_paths = find_path(envp);
 	pipex.command_path = find_command_path(root_paths, pipex.command[1][0]);
-	if (pipex.command_path == NULL)
-	{
-		perror(ERR_CMD);
-		exit(127);
-	}
 	execve(pipex.command_path, pipex.command[1], envp);
 }

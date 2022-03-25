@@ -6,7 +6,7 @@
 /*   By: tbouma <tbouma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/05 10:38:28 by tbouma            #+#    #+#             */
-/*   Updated: 2022/03/24 18:35:09 by tbouma           ###   ########.fr       */
+/*   Updated: 2022/03/25 15:25:10 by tbouma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,12 @@
 # include <unistd.h>
 # include <fcntl.h>
 
-# define ERR_INFILE		"Infile"
-# define ERR_OUTFILE	"Outfile"
+# define ERR_FILE		"Infile or outfile error"
 # define ERR_INPUT		"Invallid number of arguments."
 # define ERR_PIPE		"Pipe error"
 # define ERR_CMD		"Command not found"
+# define ERR_FORK		"Fork error"
+# define ERR_MALLOC		"Malloc error"
 
 typedef struct s_pipex
 {
@@ -49,6 +50,6 @@ void	child_free(t_pipex *pipex);
 /* utils */
 char	*find_command_path(char **dubbleptr, char *command);
 char	**find_path(char **envp);
-
+void	error_msg(char *msg);
 
 #endif
