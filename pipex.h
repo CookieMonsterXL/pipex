@@ -6,7 +6,7 @@
 /*   By: tbouma <tbouma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/05 10:38:28 by tbouma            #+#    #+#             */
-/*   Updated: 2022/03/24 16:12:13 by tbouma           ###   ########.fr       */
+/*   Updated: 2022/03/24 18:35:09 by tbouma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,27 +16,6 @@
 # include "libft/libft.h"
 # include <unistd.h>
 # include <fcntl.h>
-# include "libft/libft.h"
-# include <stdio.h>
-
-/* to write, read, close, access, pipe, dup, dup2, execve, fork */
-# include <sys/types.h>
-# include <sys/uio.h>
-
-/* malloc, free, exit */
-# include <stdlib.h>
-
-/* open, unlink */
-# include <fcntl.h>
-
-/* waitpid, wait */
-# include <sys/wait.h>
-
-/* strerror */
-# include <string.h>
-
-/*to perror*/
-# include <stdio.h>
 
 # define ERR_INFILE		"Infile"
 # define ERR_OUTFILE	"Outfile"
@@ -67,16 +46,9 @@ void	child_two(t_pipex pipex, char *envp[]);
 void	parent_free(t_pipex *pipex);
 void	child_free(t_pipex *pipex);
 
-/* error.c */
-void	msg_error(char *err);
-int		msg(char *err);
-
-/* funcions */
+/* utils */
 char	*find_command_path(char **dubbleptr, char *command);
 char	**find_path(char **envp);
-// char	*ft_strjoin(char const *s1, char const *s2);
-// char	*ft_strdup(const char *src);
-// char	**ft_split(char const *s, char c);
-// int		ft_strncmp(const char *s1, const char *s2, size_t n);
+
 
 #endif

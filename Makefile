@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: tbouma <tbouma@student.42.fr>              +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2022/03/25 13:21:52 by tbouma            #+#    #+#              #
+#    Updated: 2022/03/25 13:44:56 by tbouma           ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME := pipex
 SRCFILES := pipex.c utils.c childs.c
 LIBFT := ./libft/libft.a
@@ -13,7 +25,7 @@ relibft:
 
 $(NAME): $(SRCFILES)
 	cp $(LIBFT) $(NAME)
-	gcc  $(SRCFILES) $(CFLAG) $(LIBFT) -o $(NAME) 
+	$(CC)  $(SRCFILES) $(CFLAG) $(LIBFT) -o $(NAME) 
 
 clean:
 	rm -f $(NAME)
