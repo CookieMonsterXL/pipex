@@ -6,13 +6,13 @@
 /*   By: tbouma <tbouma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 18:06:42 by tbouma            #+#    #+#             */
-/*   Updated: 2022/03/25 15:25:47 by tbouma           ###   ########.fr       */
+/*   Updated: 2022/04/13 12:48:02 by tbouma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	parent_procces(t_pipex pipex, char **envp)
+static void	parent_procces(t_pipex pipex, char **envp)
 {
 	int		status;
 
