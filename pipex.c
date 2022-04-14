@@ -6,7 +6,7 @@
 /*   By: tbouma <tbouma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 18:06:42 by tbouma            #+#    #+#             */
-/*   Updated: 2022/04/13 12:48:02 by tbouma           ###   ########.fr       */
+/*   Updated: 2022/04/14 11:09:52 by tbouma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,4 @@ int	main(int argc, char **argv, char **envp)
 	return (0);
 }
 
-// gcc pipex.c childs.c utils.c libft/libft.a -o pipex &&
 // ./pipex text.txt "grep k" "cat" text2.txt

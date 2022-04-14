@@ -6,35 +6,41 @@
 #    By: tbouma <tbouma@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/25 13:21:52 by tbouma            #+#    #+#              #
-#    Updated: 2022/03/25 13:44:56 by tbouma           ###   ########.fr        #
+#    Updated: 2022/04/14 11:24:12 by tbouma           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME := pipex
-SRCFILES := pipex.c utils.c childs.c
-LIBFT := ./libft/libft.a
-CFLAG := -Wall -Wextra -Werror
+OBJFILES := obj/pipex.o obj/utils.o obj/childs.o
+LIBFT := libft/libft.a
+HEADERS := -I libft/
+CFLAGS := -Wall -Wextra -Werror
+CC := gcc
 
-all: libft $(NAME)
+all: $(LIBFT) $(NAME)
 
-libft:
+$(LIBFT): 
 	make -C ./libft
 
-relibft:
-	make re -C ./libft
-
-$(NAME): $(SRCFILES)
+$(NAME): $(OBJFILES)
 	cp $(LIBFT) $(NAME)
-	$(CC)  $(SRCFILES) $(CFLAG) $(LIBFT) -o $(NAME) 
+	$(CC) $(CFLAGS) $(OBJFILES) $(LIBFT) $(HEADERS) -o $(NAME) 
+
+obj/%.o: %.c
+	@mkdir -p $(dir $@)
+	$(CC) -c $(CFLAGS) -o $@ $<
 
 clean:
-	rm -f $(NAME)
+	rm -f $(OBJFILES)
 
 fclean:	clean
 	rm -f $(NAME)
 
 re: fclean all
 
-reall: relibft re
+relibft:
+	make re -C ./libft
 
-.PHONY: clean all fclean re libft relibft reall
+re_all: relibft re
+
+.PHONY: clean all fclean re relibft re_all
