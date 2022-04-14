@@ -6,7 +6,7 @@
 /*   By: tbouma <tbouma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 18:06:42 by tbouma            #+#    #+#             */
-/*   Updated: 2022/04/14 11:09:52 by tbouma           ###   ########.fr       */
+/*   Updated: 2022/04/14 12:29:14 by tbouma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,10 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_pipex	pipex;
 
-	argc = 0;
+	if (argc != 5)
+		error_msg(ERR_INPUT);
 	pipex.infile = open(argv[1], O_RDONLY);
-	pipex.outfile = open(argv[4], O_CREAT | O_RDWR | O_TRUNC, 0644);
+	pipex.outfile = open(argv[argc - 1], O_CREAT | O_RDWR | O_TRUNC, 0644);
 	if (pipex.infile < 0 || pipex.outfile < 0)
 		error_msg(ERR_FILE);
 	pipex.command[0] = ft_split(argv[2], ' ');

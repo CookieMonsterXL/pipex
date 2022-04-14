@@ -6,7 +6,7 @@
 /*   By: tbouma <tbouma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/05 10:38:28 by tbouma            #+#    #+#             */
-/*   Updated: 2022/04/13 12:49:00 by tbouma           ###   ########.fr       */
+/*   Updated: 2022/04/14 12:30:19 by tbouma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 
 # define ERR_FILE		"Infile or outfile error"
 # define ERR_FORK		"Fork error"
-# define ERR_INPUT		"Invallid number of arguments."
+# define ERR_INPUT		"Invalid number of arguments"
 # define ERR_PIPE		"Pipe error"
 # define ERR_CMD		"Command not found"
 # define ERR_MALLOC		"Malloc error"
