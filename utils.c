@@ -6,7 +6,7 @@
 /*   By: tbouma <tbouma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 11:27:39 by tbouma            #+#    #+#             */
-/*   Updated: 2022/04/15 14:00:51 by tbouma           ###   ########.fr       */
+/*   Updated: 2022/04/15 16:38:08 by tbouma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,10 @@ void	parent_free(t_pipex *pipex)
 
 	i = 0;
 	k = 0;
-	while (i < 2)
+	while (pipex->command[i])
 	{
-		while (pipex->command[i][k])
-		{
-			free(pipex->command[i][k]);
-			k++;
-		}
 		free(pipex->command[i]);
 		i++;
-		k = 0;
 	}
 }
 
@@ -69,6 +63,7 @@ char	*find_command_path(char **dubbleptr, char *command)
 		i++;
 	}
 	error_msg(ERR_CMD, 127);
+	return (0);
 }
 
 char	**find_path(char **envp)
@@ -88,6 +83,6 @@ char	**find_path(char **envp)
 	ptr += 5;
 	dubbleptr = ft_split(ptr, ':');
 	if (dubbleptr == NULL)
-		error_msg(ERR_MALLOC);
+		error_msg(ERR_MALLOC, 1);
 	return (dubbleptr);
 }

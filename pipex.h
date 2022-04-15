@@ -6,7 +6,7 @@
 /*   By: tbouma <tbouma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/05 10:38:28 by tbouma            #+#    #+#             */
-/*   Updated: 2022/04/15 15:53:34 by tbouma           ###   ########.fr       */
+/*   Updated: 2022/04/15 16:19:47 by tbouma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,9 @@ typedef struct s_pipex
 	int		infile;
 	int		outfile;
 	char	*command_path;
-	char	**command[2];
+	char	**command;
 	int		argc;
+	char	**argv;
 	int		child_n;
 }t_pipex;
 
