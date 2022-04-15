@@ -6,16 +6,22 @@
 /*   By: tbouma <tbouma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 11:27:39 by tbouma            #+#    #+#             */
-/*   Updated: 2022/03/25 16:30:01 by tbouma           ###   ########.fr       */
+/*   Updated: 2022/04/15 14:00:51 by tbouma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	error_msg(char *msg)
+void	error_msg(char *msg, int err)
+{
+	ft_putendl_fd(msg, 2);
+	exit(err);
+}
+
+void	perror_msg(char *msg, int err)
 {
 	perror(msg);
-	exit(1);
+	exit(err);
 }
 
 void	parent_free(t_pipex *pipex)
@@ -48,12 +54,12 @@ char	*find_command_path(char **dubbleptr, char *command)
 	{
 		temp = ft_strjoin(dubbleptr[i], "/");
 		if (temp == NULL)
-			error_msg(ERR_MALLOC);
+			error_msg(ERR_MALLOC, 1);
 		free(dubbleptr[i]);
 		dubbleptr[i] = temp;
 		temp = ft_strjoin(dubbleptr[i], command);
 		if (temp == NULL)
-			error_msg(ERR_MALLOC);
+			error_msg(ERR_MALLOC, 1);
 		free(dubbleptr[i]);
 		dubbleptr[i] = temp;
 		if (access(dubbleptr[i], F_OK) == 0)
@@ -62,8 +68,7 @@ char	*find_command_path(char **dubbleptr, char *command)
 		}
 		i++;
 	}
-	perror(ERR_CMD);
-	exit(127);
+	error_msg(ERR_CMD, 127);
 }
 
 char	**find_path(char **envp)
