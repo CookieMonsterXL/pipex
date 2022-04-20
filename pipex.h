@@ -6,7 +6,7 @@
 /*   By: tbouma <tbouma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/05 10:38:28 by tbouma            #+#    #+#             */
-/*   Updated: 2022/04/15 16:19:47 by tbouma           ###   ########.fr       */
+/*   Updated: 2022/04/20 13:51:58 by tbouma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 typedef struct s_pipex
 {
 	pid_t	pid1;
-	pid_t	pid2;
+	pid_t	pid_child;
 	int		tube[2];
 	int		infile;
 	int		outfile;

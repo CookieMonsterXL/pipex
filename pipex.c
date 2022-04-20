@@ -6,7 +6,7 @@
 /*   By: tbouma <tbouma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 18:06:42 by tbouma            #+#    #+#             */
-/*   Updated: 2022/04/15 16:43:52 by tbouma           ###   ########.fr       */
+/*   Updated: 2022/04/20 15:55:44 by tbouma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,10 @@ void	child(t_pipex *pipex, char **envp)
 
 	dup2(pipex->tube[1], STDOUT_FILENO);
 	close(pipex->tube[0]);
-	pipex->command = ft_split(pipex->argv[2], ' ');
+	pipex->command = ft_split(pipex->argv[pipex->child_n + 1], ' ');
+	write(2, pipex->command[0], ft_strlen(pipex->command[0]));
+	write(2, "\n", 2);
+	//dprintf("string command: %s\n", pipex->command[0]);
 	if (pipex->command == NULL)
 		error_msg(ERR_MALLOC, 1);
 	root_paths = find_path(envp);
@@ -37,31 +40,32 @@ static void	parent_procces(t_pipex *pipex, char **envp)
 	int	status;
 
 	pipex->child_n = 0;
-	pipex->pid1 = 1;
+	pipex->pid_child = 1;
 	while (pipex->child_n < (pipex->argc - 3))
 	{
 		//close(pipex->tube[0]);
 		pipex->child_n++;
 		pipe(pipex->tube);
-		if (pipex->pid1 > 0)
-			pipex->pid1 = fork();
-		if (pipex->pid1 < 0)
+		if (pipex->pid_child > 0)
+			pipex->pid_child = fork();
+		if (pipex->pid_child < 0)
 			error_msg(ERR_FORK, 1);
-		if (pipex->pid1 == 0)
+		if (pipex->pid_child == 0)
 			child(pipex, envp);
 		else
 		{
 			dup2(pipex->tube[0], STDIN_FILENO);
 			close(pipex->tube[1]);
+			close(pipex->tube[0]);
 		}
 	}
-	close(pipex->tube[0]);
+	//close(pipex->tube[0]);
 	//close(pipex->tube[1]);
 	// pipe(pipex->tube);
-	// pipex->pid1 = fork();
-	// if (pipex->pid1 < 0)
+	// pipex->pid_child = fork();
+	// if (pipex->pid_child < 0)
 	// 	error_msg(ERR_FORK, 1);
-	// if (pipex->pid1 == 0)
+	// if (pipex->pid_child == 0)
 	// 	child_one(*pipex, envp);
 	// else
 	// {
@@ -73,8 +77,8 @@ static void	parent_procces(t_pipex *pipex, char **envp)
 	// }
 	// close(pipex->tube[0]);
 	// close(pipex->tube[1]);
-	waitpid(pipex->pid1, &status, 0);
-	waitpid(pipex->pid2, &status, 0);
+	waitpid(pipex->pid_child, &status, 0);
+	//waitpid(pipex->pid2, &status, 0);
 	//printf("test");
 }
 
@@ -101,7 +105,8 @@ int	main(int argc, char **argv, char **envp)
 	// if (pipex.command[1] == NULL)
 	// 	error_msg(ERR_MALLOC, 1);
 	parent_procces(&pipex, envp);
-	parent_free(&pipex);
+//	parent_free(&pipex);
+	write(2, "test2\n", 6);
 	return (0);
 }
 
