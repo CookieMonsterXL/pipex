@@ -6,7 +6,7 @@
 /*   By: tbouma <tbouma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 11:27:39 by tbouma            #+#    #+#             */
-/*   Updated: 2022/04/15 16:38:08 by tbouma           ###   ########.fr       */
+/*   Updated: 2022/04/21 14:47:26 by tbouma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,42 +24,28 @@ void	perror_msg(char *msg, int err)
 	exit(err);
 }
 
-void	parent_free(t_pipex *pipex)
-{
-	int	i;
-	int	k;
-
-	i = 0;
-	k = 0;
-	while (pipex->command[i])
-	{
-		free(pipex->command[i]);
-		i++;
-	}
-}
-
-char	*find_command_path(char **dubbleptr, char *command)
+char	*find_cmd_path(char **root_paths, char *cmd)
 {
 	char	*temp;
 	int		i;
 
 	i = 0;
-	while (dubbleptr[i])
+	if (access(cmd, F_OK) == 0)
+		return (cmd);
+	while (root_paths[i])
 	{
-		temp = ft_strjoin(dubbleptr[i], "/");
+		temp = ft_strjoin(root_paths[i], "/");
 		if (temp == NULL)
 			error_msg(ERR_MALLOC, 1);
-		free(dubbleptr[i]);
-		dubbleptr[i] = temp;
-		temp = ft_strjoin(dubbleptr[i], command);
+		free(root_paths[i]);
+		root_paths[i] = temp;
+		temp = ft_strjoin(root_paths[i], cmd);
 		if (temp == NULL)
 			error_msg(ERR_MALLOC, 1);
-		free(dubbleptr[i]);
-		dubbleptr[i] = temp;
-		if (access(dubbleptr[i], F_OK) == 0)
-		{
-			return (dubbleptr[i]);
-		}
+		free(root_paths[i]);
+		root_paths[i] = temp;
+		if (access(root_paths[i], F_OK) == 0)
+			return (root_paths[i]);
 		i++;
 	}
 	error_msg(ERR_CMD, 127);
@@ -69,7 +55,7 @@ char	*find_command_path(char **dubbleptr, char *command)
 char	**find_path(char **envp)
 {
 	char	*ptr;
-	char	**dubbleptr;
+	char	**root_paths;
 	int		i;
 
 	i = 0;
@@ -81,8 +67,8 @@ char	**find_path(char **envp)
 		i++;
 	}
 	ptr += 5;
-	dubbleptr = ft_split(ptr, ':');
-	if (dubbleptr == NULL)
+	root_paths = ft_split(ptr, ':');
+	if (root_paths == NULL)
 		error_msg(ERR_MALLOC, 1);
-	return (dubbleptr);
+	return (root_paths);
 }
