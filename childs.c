@@ -6,7 +6,7 @@
 /*   By: tbouma <tbouma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 11:25:27 by tbouma            #+#    #+#             */
-/*   Updated: 2022/04/21 15:16:55 by tbouma           ###   ########.fr       */
+/*   Updated: 2022/04/22 10:44:25 by tbouma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,4 +21,15 @@ void	child(t_p *p, char **envp)
 		error_msg(ERR_MALLOC, 1);
 	p->cmd_path = find_cmd_path(p->root_paths, p->cmd[0]);
 	execve(p->cmd_path, p->cmd, envp);
+}
+
+void	fork_child(t_p *p, char **envp)
+{
+	p->child_n++;
+	if (p->pid_child > 0)
+		p->pid_child = fork();
+	if (p->pid_child < 0)
+		error_msg(ERR_FORK, 1);
+	if (p->pid_child == 0)
+		child(p, envp);
 }

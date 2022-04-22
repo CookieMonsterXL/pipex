@@ -6,7 +6,7 @@
 /*   By: tbouma <tbouma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/05 10:38:28 by tbouma            #+#    #+#             */
-/*   Updated: 2022/04/22 09:46:49 by tbouma           ###   ########.fr       */
+/*   Updated: 2022/04/22 10:44:01 by tbouma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct s_p
 
 /* childs.c */
 void	child(t_p *p, char **envp);
+void	fork_child(t_p *p, char **envp);
 
 /* utils.c */
 char	*find_cmd_path(char **dubbleptr, char *cmd);

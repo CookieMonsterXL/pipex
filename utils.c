@@ -6,7 +6,7 @@
 /*   By: tbouma <tbouma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 11:27:39 by tbouma            #+#    #+#             */
-/*   Updated: 2022/04/21 14:47:26 by tbouma           ###   ########.fr       */
+/*   Updated: 2022/04/22 10:02:44 by tbouma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	error_msg(char *msg, int err)
 {
 	ft_putendl_fd(msg, 2);
+	dprintf(2, "%d\n", err);
 	exit(err);
 }
 
