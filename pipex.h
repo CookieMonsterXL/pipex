@@ -6,7 +6,7 @@
 /*   By: tbouma <tbouma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/05 10:38:28 by tbouma            #+#    #+#             */
-/*   Updated: 2022/04/22 10:44:01 by tbouma           ###   ########.fr       */
+/*   Updated: 2022/04/22 12:58:46 by tbouma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define PIPEX_H
 
 # include "libft/libft.h"
+# include <stdio.h>
 # include <unistd.h>
 # include <fcntl.h>
 
@@ -25,6 +26,7 @@
 # define ERR_MALLOC		"Malloc error"
 # define ERR_DUP		"Dup2 error"
 # define ERR_PROCCES	"Procces error"
+# define ERR_EXEC		"Execve error"
 
 typedef struct s_p
 {

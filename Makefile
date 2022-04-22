@@ -6,7 +6,7 @@
 #    By: tbouma <tbouma@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/25 13:21:52 by tbouma            #+#    #+#              #
-#    Updated: 2022/04/21 12:39:56 by tbouma           ###   ########.fr        #
+#    Updated: 2022/04/22 13:06:48 by tbouma           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,15 +32,12 @@ obj/%.o: %.c
 
 clean:
 	rm -f $(OBJFILES)
+	make clean -C ./libft
 
 fclean:	clean
 	rm -f $(NAME)
+	make fclean -C ./libft
 
 re: fclean all
 
-relibft:
-	make re -C ./libft
-
-re_all: relibft re
-
-.PHONY: clean all fclean re relibft re_all
+.PHONY: clean all fclean re

@@ -6,7 +6,7 @@
 /*   By: tbouma <tbouma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 18:06:42 by tbouma            #+#    #+#             */
-/*   Updated: 2022/04/22 10:45:22 by tbouma           ###   ########.fr       */
+/*   Updated: 2022/04/22 13:16:55 by tbouma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,6 @@ int	main(int argc, char **argv, char **envp)
 	if (dup2(p.outfile, STDOUT_FILENO) < 0)
 		perror_msg(ERR_DUP, 1);
 	p.root_paths = find_path(envp);
-	if (p.root_paths == NULL)
-		error_msg(ERR_MALLOC, 1);
 	parent_procces(&p, envp);
 	free(p.root_paths);
 	return (0);
