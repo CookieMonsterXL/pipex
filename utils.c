@@ -6,7 +6,7 @@
 /*   By: tbouma <tbouma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 11:27:39 by tbouma            #+#    #+#             */
-/*   Updated: 2022/04/22 12:50:44 by tbouma           ###   ########.fr       */
+/*   Updated: 2022/04/24 13:22:35 by tbouma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ char	**find_path(char **envp)
 			break ;
 		i++;
 	}
+	if (ptr == NULL)
+		error_msg(ERR_PATH, 1);
 	ptr += 5;
 	root_paths = ft_split(ptr, ':');
 	if (root_paths == NULL)
